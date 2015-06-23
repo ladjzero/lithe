@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <meta charset="UTF-8">
+    <title>Lithe</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/flat-ui.css" rel="stylesheet" />
+    <link href="css/theme/default.css" rel="stylesheet" />
+    <script data-main="js/dev/main" src="js/dev/lib/require.js"></script>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#">主页<span class="navbar-unread">1</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="main-container" class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="profile" class="card">
+                    <img id="avatar" class="img-rounded" data-bind="attr: {src: avatar_hd}" />
+                    <span data-bind="text: screen_name">test name</span>
+                </div>
+            </div>
+            <div class="col-md-6 container">
+                <div id="to-send">
+                    <textarea class="form-control"></textarea>
+                    <div>
+                        <div id="send-options" class="btn-group">
+                           <a class="btn btn-primary" href="#"><span class="fui-image"></span></a>
+                           <a class="btn btn-primary" href="#"><span class="fui-photo"></span></a>
+                        </div>
+                        <div id="send-actions">
+                            <a href="#" class="btn btn-primary">发布</a>
+                        </div>
+                    </div>
+                </div>
+                <ul id="weibos" class="list-unstyled" data-bind="foreach: statuses">
+                    <li class="card weibo-container">
+                        <span data-bind="text: user.screen_name"></span>
+                        <p data-bind="text: text"></p>
+                        <div class="btn-group">
+                            <a class="btn btn-default" href="#">收藏</a>
+                            <a class="btn btn-default" href="#">转发</a>
+                            <a class="btn btn-default" href="#">评论</a>
+                            <a class="btn btn-default" href="#">赞</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

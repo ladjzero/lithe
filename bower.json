@@ -1,0 +1,26 @@
+{
+  "name": "lithe",
+  "version": "0.0.0",
+  "authors": [
+    "chenzhuo <ladjzero@gmail.com>"
+  ],
+  "main": "index.html",
+  "keywords": [
+    "weibo"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.18",
+    "flat-ui": "~2.2.2",
+    "knockout": "~3.3.0",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}

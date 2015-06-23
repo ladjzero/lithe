@@ -1,0 +1,39 @@
+#main-container {
+    padding-top: 46px;}
+
+#profile {
+    background: #e74c3c;
+    padding: 20px;
+    color: white;
+}
+
+#profile #avatar {
+    height: 80px;
+    width: 80px;
+    border: solid white;
+    margin: 10px;
+}
+
+.card {
+    border-radius: 6px
+}
+
+.weibo-container {
+    background: #3498db;
+    padding: 16px;
+}
+
+.nav-bar {
+    background: #34495E;
+    position: fixed; 
+    width: 100%;
+    z-index: 999;
+}
+
+.nav-bar a {
+    padding: 8px 20px
+}
+
+.navbar-unread, .navbar-new {
+    top: auto;
+}
