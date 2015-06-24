@@ -32,6 +32,7 @@ define(['ko', 'sdk'], function (ko) {
                     return p.parseCMD(W, '/users/show.json', 'get');
                 })
                 .then(function (data, success) {
+                    console.log(data);
                     ko.applyBindings(data, document.getElementById('profile'));
                 });
 
@@ -41,6 +42,7 @@ define(['ko', 'sdk'], function (ko) {
                     return p.parseCMD(W, '/statuses/home_timeline.json', 'get');
                 })
                 .then(function (data, success)  {
+                    console.log(data);
                     ko.applyBindings(data, document.getElementById('weibos'));
                 });
         });

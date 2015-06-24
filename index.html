@@ -9,6 +9,28 @@
     <script data-main="js/dev/main" src="js/dev/lib/require.js"></script>
 </head>
 <body>
+    <script type="text/html" id="weibo-body-template">
+        <img class="weibo-avatar img-rounded" data-bind="attr: {src: user.avatar_hd}" />
+        <a class="weibo-user-name" data-bind="text: user.screen_name, attr: {href: 'weibo.com' + user.url}"></a>
+        <div class="weibo-images" data-bind="foreach: pic_urls">
+            <img class="weibo-thumbnail img-rounded" data-bind="attr: {src: thumbnail_pic}">
+        </div>
+        <p data-bind="text: text"></p>
+        <div class="nested-weibo" data-bind="if: $data.retweeted_status">
+            <div data-bind="template: {name: 'weibo-body-template', data: $data.retweeted_status}"></div>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-default" href="#">收藏</a>
+            <a class="btn btn-default" href="#">转发</a>
+            <a class="btn btn-default" href="#">评论</a>
+            <a class="btn btn-default" href="#">赞</a>
+        </div>
+    </script>
+
+    <script type="text/html" id="weibo-template">
+        <li class="weibo-container" data-bind="template: {name: 'weibo-body-template', data: status}"></li>
+    </script>
+
     <nav class="nav-bar">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
@@ -37,18 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <ul id="weibos" class="list-unstyled" data-bind="foreach: statuses">
-                    <li class="card weibo-container">
-                        <span data-bind="text: user.screen_name"></span>
-                        <p data-bind="text: text"></p>
-                        <div class="btn-group">
-                            <a class="btn btn-default" href="#">收藏</a>
-                            <a class="btn btn-default" href="#">转发</a>
-                            <a class="btn btn-default" href="#">评论</a>
-                            <a class="btn btn-default" href="#">赞</a>
-                        </div>
-                    </li>
-                </ul>
+                <ul id="weibos" class="list-unstyled" data-bind="template: {name: 'weibo-template', foreach: statuses, as: 'status'}"></ul>
             </div>
             <div class="col-md-3">
 

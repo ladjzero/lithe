@@ -37,3 +37,12 @@
 .navbar-unread, .navbar-new {
     top: auto;
 }
+
+.weibo-avatar {
+    width: 60px;
+    height: 60px;
+}
+
+.nested-weibo {
+    background: #ff98db
+}
