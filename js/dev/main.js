@@ -4,9 +4,18 @@
 
 init();
 
-define(['ko', 'sdk'], function (ko) {
+define(['ko', 'jquery', 'sdk'], function (ko, $) {
 
     var wb = WB2;
+
+    $.get('http://crossorigin.me/http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US', function (data) {
+            $('body').css({
+                background: 'url(http://bing.com' + JSON.parse(data).images[0].url + ')',
+                'background-attachment': 'fixed'
+            });
+            console.log(data);
+        }
+    );
 
     var p = {
         anyWhere: function () {
