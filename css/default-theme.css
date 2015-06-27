@@ -29,18 +29,19 @@ nav:hover #logo:after {
 }
 
 #nav-search input, #nav-search button {
-    height: 35px}
+    height: 35px
+}
 
 .card {
     border-radius: 6px
 }
 
 #weibos {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 720px;
-  width: 61.8%;
-  margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 720px;
+    width: 61.8%;
+    margin-bottom: 0;
 }
 
 .weibo-container:nth-child(odd) {
@@ -54,7 +55,7 @@ nav:hover #logo:after {
 
 .weibo-container:first-child {
     border-radius: 6px 6px 0 0;
-  
+
 }
 
 .weibo-container:nth-child(even) {
@@ -63,8 +64,8 @@ nav:hover #logo:after {
 }
 
 .nav-bar {
-    background: rgba(255,255,255,0.92);
-    outline: solid #1abc9c; 
+    background: rgba(255, 255, 255, 0.92);
+    outline: solid #1abc9c;
     width: 100%;
     z-index: 999;
     position: fixed;
@@ -117,7 +118,7 @@ nav:hover #logo:after {
 
 .weibo-thumbnail {
     max-width: 100px;
-    
+
     max-height: 100px;
 }
 
@@ -146,14 +147,14 @@ nav:hover #logo:after {
 
 .weibo-operations {
     margin: 12px;
-    
+
     float: right;
 }
 
 #load-more {
     display: block;
     margin: 0 auto 6.3%;
-    
+
     width: 61.8%;
     max-width: 720px;
     background: rgb(84, 110, 122);
@@ -161,4 +162,19 @@ nav:hover #logo:after {
     padding: 24px;
     text-align: center;
     border-radius: 0 0 6px 6px;
+}
+
+@media (max-width: 720px) {
+    #weibos {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        min-width: none;
+    }
+
+    #load-more {
+        margin-top: 34px;
+
+        border-radius: 6px;
+    }
 }
