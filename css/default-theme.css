@@ -1,0 +1,164 @@
+body {
+    background: #263238;
+}
+
+#main-container {
+    padding-top: 76px;
+}
+
+#profile #avatar {
+    height: 33px;
+    width: 33px;
+    margin: 10px;
+    float: right;
+}
+
+#logo {
+    cursor: pointer;
+    text-align: center;
+}
+
+nav:hover #logo:after {
+    content: '+';
+    position: absolute;
+}
+
+#nav-search {
+    margin-top: 9px;
+    width: 160px;
+}
+
+#nav-search input, #nav-search button {
+    height: 35px}
+
+.card {
+    border-radius: 6px
+}
+
+#weibos {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 720px;
+  width: 61.8%;
+  margin-bottom: 0;
+}
+
+.weibo-container:nth-child(odd) {
+    background: #EAEAEA;
+    color: rgb(38, 50, 56);
+}
+
+.weibo-container {
+    /* margin-top: 1px; */
+}
+
+.weibo-container:first-child {
+    border-radius: 6px 6px 0 0;
+  
+}
+
+.weibo-container:nth-child(even) {
+    background: white;
+    color: rgb(57, 71, 70);
+}
+
+.nav-bar {
+    background: rgba(255,255,255,0.92);
+    outline: solid #1abc9c; 
+    width: 100%;
+    z-index: 999;
+    position: fixed;
+}
+
+.navbar-unread, .navbar-new {
+    top: auto;
+}
+
+.weibo-header {
+    padding: 24px;
+
+}
+
+.weibo-avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.weibo-text {
+    padding-left: 24px;
+
+    padding-right: 24px;
+}
+
+.weibo-images {
+    font-size: 0;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+.weibo-thumbnail-wapper {
+    width: 100px;
+    height: 100px;
+    margin: 4px;
+    background: rgba(242, 242, 242, 0.5);
+    display: inline-block;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+.weibo-thumbnail-wapper.image-large {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+}
+
+.weibo-thumbnail {
+    max-width: 100px;
+    
+    max-height: 100px;
+}
+
+.weibo-thumbnail-wapper.image-large .weibo-thumbnail {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: none;
+}
+
+.nested-weibo {
+    position: relative;
+    background: #546E7A;
+    color: rgb(148, 164, 171);
+}
+
+.nested-weibo:before {
+    top: -10px;
+    left: 30px;
+    position: absolute;
+    content: '';
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid #546E7A;
+}
+
+.weibo-operations {
+    margin: 12px;
+    
+    float: right;
+}
+
+#load-more {
+    display: block;
+    margin: 0 auto 6.3%;
+    
+    width: 61.8%;
+    max-width: 720px;
+    background: rgb(84, 110, 122);
+    color: white;
+    padding: 24px;
+    text-align: center;
+    border-radius: 0 0 6px 6px;
+}
