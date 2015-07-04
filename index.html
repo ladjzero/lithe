@@ -4,33 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>Lithe</title>
-    <link href="css/lib/bootstrap.css" rel="stylesheet"/>
-    <link href="css/lib/flat-ui.css" rel="stylesheet"/>
+    <link href="css/base.css" rel="stylesheet"/>
     <link href="css/default-theme.css" rel="stylesheet"/>
     <script data-main="js/dev/main" src="js/dev/lib/require.js"></script>
 </head>
-<body>
+<body class="unstyled">
 <script type="text/html" id="weibo-body-template">
     <div class="weibo-header">
-        <img class="weibo-avatar img-rounded" data-bind="attr: {src: user.avatar_hd}"/>
-        <a class="weibo-user-name" data-bind="text: user.screen_name, attr: {href: 'weibo.com' + user.url}"></a>
+        <a class="weibo-user-name" data-bind="attr: {href: 'weibo.com' + user.url}">
+            <img class="weibo-avatar img-rounded" data-bind="attr: {src: user.avatar_hd}"/>
+            <span data-bind="text: user.screen_name"></span>
+        </a>
     </div>
     <p class="weibo-text" data-bind="text: text"></p>
     <div class="weibo-images" data-bind="foreach: pic_urls">
         <div class="weibo-thumbnail-wapper" data-bind="click: click, css: {'image-large': isLarge()}"><img class="weibo-thumbnail"
                                                                           data-bind="attr: {src: url}"></div>
     </div>
+    <div class="weibo-operations">
+        <a class="btn btn-default" href="#">收藏</a>
+        <a class="btn btn-default" href="#">转发<span data-bind="text: reposts_count || ''"></span></a>
+        <a class="btn btn-default" href="#">评论<span data-bind="text: comments_count || ''"></span></a>
+        <a class="btn btn-default" href="#">赞<span data-bind="text: attitudes_count || ''"></span></a>
+    </div>
     <div data-bind="if: $data.retweeted_status">
         <div class="nested-weibo"
              data-bind="template: {name: 'weibo-body-template', data: $data.retweeted_status}"></div>
-    </div>
-    <div class="container-fluid">
-        <div class="weibo-operations btn-group">
-            <a class="btn btn-default" href="#">收藏</a>
-            <a class="btn btn-default" href="#">转发<span data-bind="text: reposts_count || ''"></span></a>
-            <a class="btn btn-default" href="#">评论<span data-bind="text: comments_count || ''"></span></a>
-            <a class="btn btn-default" href="#">赞<span data-bind="text: attitudes_count || ''"></span></a>
-        </div>
     </div>
 </script>
 
@@ -38,31 +37,13 @@
     <li class="weibo-container" data-bind="template: {name: 'weibo-body-template', data: status}"></li>
 </script>
 
-<nav class="nav-bar container-fluid">
-    <div class="col-md-5">
-        <ul class="nav navbar-nav navbar-left">
-            <li><a href="#">主页<span class="navbar-unread">1</span></a></li>
-            <li><a href="#">主页<span class="navbar-unread">1</span></a></li>
-            <li><a href="#">主页<span class="navbar-unread">1</span></a></li>
-        </ul>
-    </div>
-    <div id="logo" class="navbar-brand col-md-2">Lithe</div>
-    <div class="col-md-5">
-        <div id="nav-search" class="input-group pull-right">
-            <input class="form-control" type="search" placeholder="Search">
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn"><span class="fui-search"></span></button>
-                    </span>
-        </div>
-        <div id="profile">
-            <img id="avatar" class="img-rounded" data-bind="attr: {src: profile_image_url}"/>
-        </div>
-    </div>
+<nav>
+    <a id="home" href="#">Lithe</a>
 </nav>
 <div id="main-container">
-    <ul id="weibos" class="list-unstyled"
+    <ul id="weibos" class="unstyled"
         data-bind="template: {name: 'weibo-template', foreach: statuses, as: 'status'}"></ul>
-    <button id="load-more" class="btn">Loading ...</button>
+    <button id="load-more" class="unstyled">Loading ...</button>
 
 </div>
 </div>

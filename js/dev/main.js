@@ -5,23 +5,33 @@
 init();
 
 define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
-    var weibosModel = {
+    var Lithe = ko._lithe = {
         sinceId: 0,
         maxId: 0,
-        statuses: ko.observableArray()
+        statuses: ko.observableArray(),
+        reset: function () {
+            this.statuses.removeAll();
+            this.sinceId = 0;
+            this.maxId = 0;
+            return this;
+        }
     };
 
-    var $load = $('#load-more').click(load);
+    var $load = $('#load-more').click(load),
+        $home = $('#home').click(function () {
+            Lithe.reset();
+            load();
+        });
 
-    ko.applyBindings(weibosModel, document.getElementById('weibos'));
+    ko.applyBindings(Lithe, document.getElementById('weibos'));
 
-    function onWeiboImageClick (data, e) {
+    function onWeiboImageClick(data, e) {
         var src = this.url();
 
         this.url(this.isLarge() ? src.replace('large', 'thumbnail') : src.replace('thumbnail', 'large'));
     }
 
-    function attachClickToImages (imageUrls) {
+    function attachClickToImages(imageUrls) {
         imageUrls.forEach(function (url) {
             url.url = ko.observable(url.thumbnail_pic);
             url.isLarge = ko.computed(function () {
@@ -31,10 +41,10 @@ define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
         });
     }
 
-    function load () {
+    function load() {
         sdk.homeLine({
             query: {
-                max_id: weibosModel.maxId
+                max_id: Lithe.maxId
             },
             before: function () {
                 $load.attr('disabled', true);
@@ -50,8 +60,8 @@ define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
                     status.retweeted_status && status.retweeted_status.pic_urls && attachClickToImages(status.retweeted_status.pic_urls);
                 });
 
-                weibosModel.maxId = data.max_id;
-                weibosModel.statuses.push.apply(weibosModel.statuses, data.statuses);
+                Lithe.maxId = data.max_id;
+                Lithe.statuses.push.apply(Lithe.statuses, data.statuses);
             }
         });
     }
@@ -88,7 +98,7 @@ define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
         });
 });
 
-function init () {
+function init() {
     requirejs.config({
         baseUrl: 'js/dev',
         paths: {

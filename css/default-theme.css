@@ -1,5 +1,19 @@
 body {
     background: #263238;
+    font-size: 14px;
+    line-height: 1.6em;
+}
+
+img {
+    vertical-align: middle;
+}
+
+a {
+    color: rgb(38, 50, 56);
+}
+
+#home {
+    font-size: 1.9em;
 }
 
 #main-container {
@@ -17,9 +31,23 @@ body {
     cursor: pointer;
     text-align: center;
 }
+.weibo-user-name {
+   
+    text-decoration: blink;
+    font-weight: bolder;
+    color: rgb(23, 28, 31);
+}
+
+.weibo-user-name span {
+    margin-left: 12px;
+}
+
+nav {
+    height: 50px;
+    line-height: 50px;
+}
 
 nav:hover #logo:after {
-    content: '+';
     position: absolute;
 }
 
@@ -46,7 +74,7 @@ nav:hover #logo:after {
 
 .weibo-container:nth-child(odd) {
     background: #EAEAEA;
-    color: rgb(38, 50, 56);
+    border-bottom: 1px solid rgba(38, 50, 56, 0.05);
 }
 
 .weibo-container {
@@ -60,15 +88,17 @@ nav:hover #logo:after {
 
 .weibo-container:nth-child(even) {
     background: white;
-    color: rgb(57, 71, 70);
+    color: rgb(23, 28, 31);
+    border-bottom: 1px solid rgba(38, 50, 56, 0.13);
 }
 
-.nav-bar {
+nav {
     background: rgba(255, 255, 255, 0.92);
     outline: solid #1abc9c;
     width: 100%;
     z-index: 999;
     position: fixed;
+    text-align: center;
 }
 
 .navbar-unread, .navbar-new {
@@ -76,8 +106,9 @@ nav:hover #logo:after {
 }
 
 .weibo-header {
-    padding: 24px;
+    padding: 24px 24px 0;
 
+    color: rgb(38, 50, 56);
 }
 
 .weibo-avatar {
@@ -93,9 +124,7 @@ nav:hover #logo:after {
 
 .weibo-images {
     font-size: 0;
-
-    padding-top: 12px;
-    padding-bottom: 12px;
+    line-height: 100px;
     text-align: center;
 }
 
@@ -103,10 +132,9 @@ nav:hover #logo:after {
     width: 100px;
     height: 100px;
     margin: 4px;
-    background: rgba(242, 242, 242, 0.5);
+    background: rgba(38, 50, 56, 0.16);
     display: inline-block;
     text-align: center;
-    line-height: 100px;
     cursor: pointer;
 }
 
@@ -131,8 +159,8 @@ nav:hover #logo:after {
 
 .nested-weibo {
     position: relative;
-    background: #546E7A;
-    color: rgb(148, 164, 171);
+    background: #94A9B3;
+    padding-bottom: 1px;
 }
 
 .nested-weibo:before {
@@ -142,13 +170,13 @@ nav:hover #logo:after {
     content: '';
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 10px solid #546E7A;
+    border-bottom: 10px solid #94A9B3;
 }
 
 .weibo-operations {
-    margin: 12px;
+    margin: 12px 24px;
 
-    float: right;
+    text-align: right;
 }
 
 #load-more {
@@ -176,5 +204,14 @@ nav:hover #logo:after {
         margin-top: 34px;
 
         border-radius: 6px;
+    }
+
+    nav {
+        width: 480px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        position: fixed;
+        z-index: 999;
+        outline: solid 4px rgb(84, 110, 122);
     }
 }
