@@ -21,10 +21,15 @@ module.exports = function(grunt) {
                     {cwd: 'bower_components/blueimp-gallery/img/', src: '*', dest: 'img/', expand: true}
                 ]
             }
+        },
+        clean: {
+            js: ['js/dev/lib'],
+            css: ['!css/base.css', '!css/default-theme.css', '!fonts/Chat Moss.ttf']
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Default task(s).
     grunt.registerTask('default', ['copy']);
