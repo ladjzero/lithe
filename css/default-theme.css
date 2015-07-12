@@ -13,7 +13,10 @@ a {
 }
 
 #home {
-    font-size: 1.9em;
+    font-size: 2.4em;
+    font-family: lithe;
+    text-decoration: blink;
+    vertical-align: -webkit-baseline-middle;
 }
 
 #main-container {
@@ -94,11 +97,30 @@ nav:hover #logo:after {
 
 nav {
     background: rgba(255, 255, 255, 0.92);
-    outline: solid #1abc9c;
     width: 100%;
     z-index: 999;
     position: fixed;
     text-align: center;
+    transition: top 0.4s;
+    top: 0;
+}
+
+#progress {
+    height: 3px;
+    top: 50px;
+    background: rgb(7, 218, 245);
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    transition: width 1s;
+}
+
+nav > progress {
+    width: 100%;
+}
+
+.nav-hide {
+    top: -50px;
 }
 
 .navbar-unread, .navbar-new {
@@ -179,6 +201,20 @@ nav {
     text-align: right;
 }
 
+.comments > ul {
+    padding: 12px 24px;
+    
+}
+
+.comments li {
+    margin: 6px 0;
+}
+
+.comments {
+    transition: height 0.4s;
+    color: rgb(98, 107, 111);
+}
+
 #load-more {
     display: block;
     margin: 0 auto 6.3%;
@@ -190,28 +226,52 @@ nav {
     padding: 24px;
     text-align: center;
     border-radius: 0 0 6px 6px;
+    cursor: pointer;
+}
+
+#load-more[disabled] {
+    background: rgb(136, 150, 157);
+    cursor: not-allowed;
+}
+
+.no-shadow {
+    box-shadow: none!important;
+}
+
+ol.indicator {
+    width: 100%;
+    line-height: 0;
+    background: rgba(38, 50, 56, 0.44);
+    padding: 0;
+}
+
+.indicator > li {
+    padding-bottom: 8%;
+    width: 8%;
+    margin: 1%;
+    background-position: center;
+    background-size: contain;
+    display: inline-block;
+    background-repeat: no-repeat; 
+}
+
+.indicator > li.active {
+    outline: 1px solid white;
+}
+
+.blueimp-gallery-carousel > .slides {
+    position: relative!important;
+}
+
+.blueimp-gallery-carousel {
+    padding: 0!important;
 }
 
 @media (max-width: 720px) {
-    #weibos {
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
+    #weibos, #load-more {
+        margin-left: 3%;
+        margin-right: 3%;
+        width: 94%;
         min-width: none;
-    }
-
-    #load-more {
-        margin-top: 34px;
-
-        border-radius: 6px;
-    }
-
-    nav {
-        width: 480px;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.9);
-        position: fixed;
-        z-index: 999;
-        outline: solid 4px rgb(84, 110, 122);
     }
 }

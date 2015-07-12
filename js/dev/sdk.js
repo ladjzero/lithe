@@ -23,6 +23,21 @@ define(['jssdk'], function () {
                     return sdk.parseCMD(W, '/statuses/home_timeline.json?' + query, 'get');
                 })
                 .then(options.onResult);
+        },
+        comments: function (options) {
+            options.before && options.before();
+
+            if (!options.id) {
+                throw Error('id is required to get comments');
+            }
+
+            Promise
+                .resolve()
+                .then(sdk.anyWhere)
+                .then(function (W) {
+                    return sdk.parseCMD(W, '/comments/show.json?id=' + options.id, 'get');
+                })
+                .then(options.onResult);
         }
     };
 

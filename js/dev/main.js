@@ -4,7 +4,7 @@
 
 init();
 
-define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
+define(['gallery', 'ko', 'jquery', './sdk', 'progress'], function (galleryVM, ko, $, sdk, progress) {
     var Lithe = ko._lithe = {
         sinceId: 0,
         maxId: 0,
@@ -14,8 +14,35 @@ define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
             this.sinceId = 0;
             this.maxId = 0;
             return this;
+        },
+        onComment: function (data) {
+            if (data.comments().length) {
+                data.comments.removeAll();
+            } else {
+                sdk.comments({
+                    id: data.id,
+                    before: progress.start,
+                    onResult: function (res) {
+                        progress.end();
+                        data.comments.push.apply(data.comments, res.comments);
+                    }
+                });
+            }
         }
     };
+
+    var nav = document.querySelector('nav'),
+        $nav = $(nav);
+
+    document.addEventListener('scroll', function (e) {
+        document._scorllTop = document._scorllTop || 0;
+
+        if (document._scrollTop > (document._scrollTop = document.body.scrollTop)) {
+            $nav.removeClass('nav-hide');
+        } else {
+            $nav.addClass('nav-hide');
+        }
+    });
 
     var $load = $('#load-more').click(load),
         $home = $('#home').click(function () {
@@ -47,17 +74,19 @@ define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
                 max_id: Lithe.maxId
             },
             before: function () {
+                progress.start();
                 $load.attr('disabled', true);
             },
             onResult: function (data, success) {
+                progress.end();
                 $load.attr('disabled', false);
 
                 console.log(data);
 
                 data.statuses.forEach(function (status) {
-                    status.pic_urls && attachClickToImages(status.pic_urls);
+                    status.comments = ko.observableArray();
 
-                    status.retweeted_status && status.retweeted_status.pic_urls && attachClickToImages(status.retweeted_status.pic_urls);
+                    status.retweeted_status && (status.retweeted_status.comments = ko.observableArray());
                 });
 
                 Lithe.maxId = data.max_id;
@@ -91,7 +120,7 @@ define(['ko', 'jquery', './sdk'], function (ko, $, sdk) {
                 })
                 .then(function (data, success) {
                     console.log(data);
-                    ko.applyBindings(data, document.getElementById('profile'));
+                    //ko.applyBindings(data, document.getElementById('profile'));
                 });
 
             load();
@@ -104,7 +133,16 @@ function init() {
         paths: {
             jssdk: 'http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3942605728&debug=true',
             ko: 'lib/knockout',
-            jquery: 'lib/jquery'
+            jquery: 'lib/jquery',
+            text: 'lib/text'
+        },
+        shim: {
+            'lib/blueimp-gallery-indicator': {
+                deps: ['lib/blueimp-gallery']
+            },
+            'lib/blueimp-gallery': {
+                deps: ['lib/blueimp-helper']
+            }
         }
     });
 }

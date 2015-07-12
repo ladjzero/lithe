@@ -12,11 +12,13 @@ module.exports = function(grunt) {
                     {src: 'bower_components/requirejs/require.js', dest: 'js/dev/lib/require.js'},
                     {src: 'bower_components/knockout/dist/knockout.debug.js', dest: 'js/dev/lib/knockout.js'},
                     {src: 'bower_components/jquery/dist/jquery.js', dest: 'js/dev/lib/jquery.js'},
-                    {src: 'bower_components/bootstrap/dist/css/bootstrap.css', dest: 'css/lib/bootstrap.css'},
-                    {src: 'bower_components/bootstrap/dist/js/bootstrap.js', dest: 'js/dev/lib/bootstrap.js'},
-                    {cwd: 'bower_components/bootstrap/dist/fonts/', src: '**/*', dest: 'css/fonts/', expand: true},
-                    {cwd: 'bower_components/flat-ui/dist/fonts/', src: '**/*', dest: 'css/fonts/', expand: true},
-                    {src: 'bower_components/flat-ui/dist/css/flat-ui.css', dest: 'css/lib/flat-ui.css'}
+                    {src: 'bower_components/text/text.js', dest: 'js/dev/lib/text.js'},
+                    {src: 'bower_components/blueimp-gallery/js/blueimp-gallery.js', dest: 'js/dev/lib/blueimp-gallery.js'},
+                    {src: 'bower_components/blueimp-gallery/js/blueimp-helper.js', dest: 'js/dev/lib/blueimp-helper.js'},
+                    {src: 'bower_components/blueimp-gallery/js/blueimp-gallery-indicator.js', dest: 'js/dev/lib/blueimp-gallery-indicator.js'},
+                    {src: 'bower_components/blueimp-gallery/css/blueimp-gallery.css', dest: 'css/blueimp-gallery.css'},
+                    {src: 'bower_components/blueimp-gallery/css/blueimp-gallery-indicator.css', dest: 'css/blueimp-gallery-indicator.css'},
+                    {cwd: 'bower_components/blueimp-gallery/img/', src: '*', dest: 'img/', expand: true}
                 ]
             }
         }

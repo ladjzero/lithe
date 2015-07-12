@@ -18,9 +18,9 @@
   ],
   "dependencies": {
     "requirejs": "~2.1.18",
-    "flat-ui": "~2.2.2",
     "knockout": "~3.3.0",
     "jquery": "~2.1.4",
-    "bootstrap": "~3.3.5"
+    "text": "~2.0.14",
+    "blueimp-gallery": "~2.15.2"
   }
 }
