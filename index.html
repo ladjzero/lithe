@@ -22,19 +22,19 @@
             </a>
         </div>
     </div>
-    <p class="weibo-text">{{status.text}}</p>
+    <p class="weibo-text" v-html="status.text | linkify | atify"></p>
 
     <images urls="{{status.pic_urls || []}}"></images>
 
     <div class="weibo-operations">
-        <a class="btn btn-default" href="#" data-bind="click: $root.onSave">收藏</a>
-        <a class="btn btn-default" href="#" data-bind="click: $root.onRepo">转发<span data-bind="text: reposts_count || ''"></span></a>
-        <a class="btn btn-default" href="#" data-bind="click: $root.onComment">评论<span data-bind="text: comments_count || ''"></span></a>
-        <a class="btn btn-default" href="#" data-bind="click: $root.onLike">赞<span data-bind="text: attitudes_count || ''"></span></a>
+        <a class="btn btn-default" href="#" v-on="click: save">收藏</a>
+        <a class="btn btn-default" href="#" v-on="click: showReposts">转发<span v-if="status.reposts_count">({{status.reposts_count}})</span></a>
+        <a class="btn btn-default" href="#" v-on="click: showComments">评论<span v-if="status.comments_count">({{status.comments_count}})</span></a>
+        <a class="btn btn-default" href="#" v-on="click: like">赞<span v-if="status.attitudes_count">({{status.attitudes_count}})</span></a>
     </div>
     <div class="comments" v-if="status.comments && status.comments.length">
         <ul class="unstyled">
-            <li v-repeat="comments"><a href="#">{{user.name}}</a>: <span>{{text}}</span></li>
+            <li v-repeat="status.comments"><a href="#">{{user.name}}</a>: <span>{{text}}</span></li>
         </ul>
     </div>
     <div class="nested-weibo" v-if="status.retweeted_status">

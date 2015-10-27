@@ -9,6 +9,7 @@ var progress = require('nprogress')
 var Vue = require('vue')
 var PhotoSwipe = require('photoswipe')
 var PhotoSwipeUI = require('photoswipe/src/js/ui/photoswipe-ui-default')
+var filters = require('./filters')
 
 Vue.config.debug = true
 
@@ -16,7 +17,35 @@ $(function () {
 
 var WeiboBody = Vue.extend({
     template: '#weibo-body-template',
-    props: ['status']
+    props: ['status'],
+    methods: {
+        save: function () {
+
+        },
+        showReposts: function () {
+
+        },
+        showComments: function () {
+            var status = this.$data.status
+            var len = status.comments.length
+
+            if (len) {
+                status.comments.splice(0, len)
+            } else {
+                sdk.comments({
+                    id: status.id,
+                    before: progress.start,
+                    onResult: function (res) {
+                        progress.done();
+                        status.comments.push.apply(status.comments, res.comments);
+                    }
+                })
+            }
+        },
+        like: function () {
+
+        }
+    }
 });
 
 var Gallery = Vue.extend({
@@ -74,6 +103,9 @@ Vue.filter('pluck', function (value, key) {
         return v[key];
     })
 })
+
+Vue.filter('linkify', filters.linkify)
+Vue.filter('atify', filters.atify)
 
 
 var App = new Vue({
@@ -166,11 +198,11 @@ var maxId = 0;
 
                 console.log(data);
 
-                // data.statuses.forEach(function (status) {
-                    // status.comments = ko.observableArray();
+                data.statuses.forEach(function (status) {
+                    status.comments = [];
 
-                    // status.retweeted_status && (status.retweeted_status.comments = ko.observableArray());
-                // });
+                    status.retweeted_status && (status.retweeted_status.comments = []);
+                });
 
                 maxId = data.max_id;
                 App.$data.statuses.push.apply(App.$data.statuses, data.statuses);
