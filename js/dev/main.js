@@ -2,34 +2,116 @@
  * Created by chenzhuo on 15-6-20.
  */
 
-init();
+// init();
+var $ = require('jquery')
+var sdk = require('./sdk')
+var progress = require('nprogress')
+var Vue = require('vue')
+var PhotoSwipe = require('photoswipe')
+var PhotoSwipeUI = require('photoswipe/src/js/ui/photoswipe-ui-default')
 
-define(['gallery', 'ko', 'jquery', './sdk', 'progress'], function (galleryVM, ko, $, sdk, progress) {
-    var Lithe = ko._lithe = {
-        sinceId: 0,
-        maxId: 0,
-        statuses: ko.observableArray(),
-        reset: function () {
-            this.statuses.removeAll();
-            this.sinceId = 0;
-            this.maxId = 0;
-            return this;
-        },
-        onComment: function (data) {
-            if (data.comments().length) {
-                data.comments.removeAll();
-            } else {
-                sdk.comments({
-                    id: data.id,
-                    before: progress.start,
-                    onResult: function (res) {
-                        progress.end();
-                        data.comments.push.apply(data.comments, res.comments);
-                    }
-                });
+Vue.config.debug = true
+
+$(function () {
+
+var WeiboBody = Vue.extend({
+    template: '#weibo-body-template',
+    props: ['status']
+});
+
+var Gallery = Vue.extend({
+    template: '#gallery-template',
+    props: ['urls'],
+    created: function () {
+        var that = this;
+
+        this.$on('imageClick', function (src, srcs) {
+            var replace = function (str) {
+                return str.replace('thumbnail', 'large')
             }
+
+            src = replace(src)
+            srcs = srcs.map(replace)
+            
+            var gallery = this.gallery = new PhotoSwipe(this.$el, PhotoSwipeUI, srcs.map(function (src) {
+                return {
+                    src: src,
+                    w: 10,
+                    h: 10
+                }
+            }, {index: srcs.indexOf(src)}))
+
+            gallery.listen('imageLoadComplete', function (index, item) {
+                var img = gallery.currItem.container.lastChild
+                item.w = img.naturalWidth
+                item.h = img.naturalHeight
+                gallery.updateSize()
+            })
+
+            gallery.init()
+        })
+    }
+})
+
+var Images = Vue.extend({
+    template: '#images-template',
+    props: ['urls'],
+    methods: {
+        clickImage: function (e) {
+            this.$dispatch('imageClick', e.target.src, this.urls.map(function (url) {
+                return url.thumbnail_pic
+            }))
         }
-    };
+    }
+})
+
+Vue.component('weibo-body', WeiboBody)
+Vue.component('gallery', Gallery)
+Vue.component('images', Images)
+
+Vue.filter('pluck', function (value, key) {
+    return value.map(function (v) {
+        return v[key];
+    })
+})
+
+
+var App = new Vue({
+    el: '#app',
+    data: {statuses: []},
+    ready: function () {
+        this.$on('imageClick', function (src, srcs) {
+            this.$broadcast('imageClick', src, srcs)
+        });
+    }
+})
+
+var maxId = 0;
+    // var Lithe = ko._lithe = {
+    //     sinceId: 0,
+    //     maxId: 0,
+    //     statuses: ko.observableArray(),
+    //     reset: function () {
+    //         this.statuses.removeAll();
+    //         this.sinceId = 0;
+    //         this.maxId = 0;
+    //         return this;
+    //     },
+    //     onComment: function (data) {
+    //         if (data.comments().length) {
+    //             data.comments.removeAll();
+    //         } else {
+    //             sdk.comments({
+    //                 id: data.id,
+    //                 before: progress.start,
+    //                 onResult: function (res) {
+    //                     progress.done();
+    //                     data.comments.push.apply(data.comments, res.comments);
+    //                 }
+    //             });
+    //         }
+    //     }
+    // };
 
     var nav = document.querySelector('nav'),
         $nav = $(nav);
@@ -46,11 +128,12 @@ define(['gallery', 'ko', 'jquery', './sdk', 'progress'], function (galleryVM, ko
 
     var $load = $('#load-more').click(load),
         $home = $('#home').click(function () {
-            Lithe.reset();
+            // Lithe.reset();
+            App.$data.statuses = [];
             load();
         });
 
-    ko.applyBindings(Lithe, document.getElementById('weibos'));
+    // ko.applyBindings(Lithe, document.getElementById('weibos'));
 
     function onWeiboImageClick(data, e) {
         var src = this.url();
@@ -58,39 +141,39 @@ define(['gallery', 'ko', 'jquery', './sdk', 'progress'], function (galleryVM, ko
         this.url(this.isLarge() ? src.replace('large', 'thumbnail') : src.replace('thumbnail', 'large'));
     }
 
-    function attachClickToImages(imageUrls) {
-        imageUrls.forEach(function (url) {
-            url.url = ko.observable(url.thumbnail_pic);
-            url.isLarge = ko.computed(function () {
-                return url.url().indexOf('/thumbnail/') == -1;
-            });
-            url.click = onWeiboImageClick;
-        });
-    }
+    // function attachClickToImages(imageUrls) {
+    //     imageUrls.forEach(function (url) {
+    //         url.url = ko.observable(url.thumbnail_pic);
+    //         url.isLarge = ko.computed(function () {
+    //             return url.url().indexOf('/thumbnail/') == -1;
+    //         });
+    //         url.click = onWeiboImageClick;
+    //     });
+    // }
 
     function load() {
         sdk.homeLine({
             query: {
-                max_id: Lithe.maxId
+                max_id: maxId
             },
             before: function () {
                 progress.start();
                 $load.attr('disabled', true);
             },
             onResult: function (data, success) {
-                progress.end();
+                progress.done();
                 $load.attr('disabled', false);
 
                 console.log(data);
 
-                data.statuses.forEach(function (status) {
-                    status.comments = ko.observableArray();
+                // data.statuses.forEach(function (status) {
+                    // status.comments = ko.observableArray();
 
-                    status.retweeted_status && (status.retweeted_status.comments = ko.observableArray());
-                });
+                    // status.retweeted_status && (status.retweeted_status.comments = ko.observableArray());
+                // });
 
-                Lithe.maxId = data.max_id;
-                Lithe.statuses.push.apply(Lithe.statuses, data.statuses);
+                maxId = data.max_id;
+                App.$data.statuses.push.apply(App.$data.statuses, data.statuses);
             }
         });
     }
@@ -125,24 +208,4 @@ define(['gallery', 'ko', 'jquery', './sdk', 'progress'], function (galleryVM, ko
 
             load();
         });
-});
-
-function init() {
-    requirejs.config({
-        baseUrl: 'js/dev',
-        paths: {
-            jssdk: 'http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3942605728&debug=true',
-            ko: 'lib/knockout',
-            jquery: 'lib/jquery',
-            text: 'lib/text'
-        },
-        shim: {
-            'lib/blueimp-gallery-indicator': {
-                deps: ['lib/blueimp-gallery']
-            },
-            'lib/blueimp-gallery': {
-                deps: ['lib/blueimp-helper']
-            }
-        }
-    });
-}
+        })

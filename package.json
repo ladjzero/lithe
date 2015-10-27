@@ -23,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/ladjzero/lithe/issues"
   },
-  "homepage": "https://github.com/ladjzero/lithe#readme"
+  "homepage": "https://github.com/ladjzero/lithe#readme",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "knockout": "^3.3.0",
+    "nprogress": "^0.2.0",
+    "photoswipe": "^4.1.0",
+    "raw-loader": "^0.5.1",
+    "vue": "^0.12.16"
+  }
 }
