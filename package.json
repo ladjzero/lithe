@@ -2,7 +2,7 @@
   "name": "lithe",
   "version": "0.0.0",
   "description": "A sina weibo client powered by it's JS-SDK.",
-  "main": "Gruntfile.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

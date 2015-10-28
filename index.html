@@ -13,88 +13,11 @@
     <script src="dist/app.bundle.js"></script>
 </head>
 <body class="unstyled" id="app">
-<script type="x-template" id="weibo-body-template">
-    <div class="weibo-header">
-        <div class="user">
-            <a class="weibo-user-name" href="weibo.com{{status.user.url}}">
-                <img class="weibo-avatar img-rounded" src="{{status.user.avatar_hd}}"/>
-                <span>{{status.user.screen_name}}</span>
-            </a>
-        </div>
-    </div>
-    <p class="weibo-text" v-html="status.text | linkify | atify"></p>
 
-    <images urls="{{status.pic_urls || []}}"></images>
-
-    <div class="weibo-operations">
-        <a class="btn btn-default" href="#" v-on="click: save">收藏</a>
-        <a class="btn btn-default" href="#" v-on="click: showReposts">转发<span v-if="status.reposts_count">({{status.reposts_count}})</span></a>
-        <a class="btn btn-default" href="#" v-on="click: showComments">评论<span v-if="status.comments_count">({{status.comments_count}})</span></a>
-        <a class="btn btn-default" href="#" v-on="click: like">赞<span v-if="status.attitudes_count">({{status.attitudes_count}})</span></a>
-    </div>
-    <div class="comments" v-if="status.comments && status.comments.length">
-        <ul class="unstyled">
-            <li v-repeat="status.comments"><a href="#">{{user.name}}</a>: <span>{{text}}</span></li>
-        </ul>
-    </div>
-    <div class="nested-weibo" v-if="status.retweeted_status">
-        <weibo-body status="{{status.retweeted_status}}">
-    </div>
-</script>
-
-<script type="x-template" id="gallery-template">
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
-</script>
-
-<script type="x-template" id="images-template">
-    <div>
-        <img src="{{url.thumbnail_pic}}" v-repeat="url in urls" v-on="click: clickImage" />
-    </div>
-</script>
-
-<nav>
-    <span id="progress" data-bind="style: {width: width}"></span>
-    <a id="home" href="#">Lithe</a>
-</nav>
 <gallery></gallery>
 <div id="main-container">
     <ul id="weibos" class="unstyled">
-        <li class="weibo-container" id="wb{{status.id}}" v-repeat="status in statuses"><weibo-body status="{{status}}"/></li>
+        <li class="weibo-container" id="wb{{status.id}}" v-repeat="status in statuses"><weibo-item status="{{status}}"/></li>
     </ul>
     <button id="load-more" class="unstyled">加载更多</button>
 </div>

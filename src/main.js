@@ -7,80 +7,14 @@ var $ = require('jquery')
 var sdk = require('./sdk')
 var progress = require('nprogress')
 var Vue = require('vue')
-var PhotoSwipe = require('photoswipe')
-var PhotoSwipeUI = require('photoswipe/src/js/ui/photoswipe-ui-default')
+
 var filters = require('./filters')
+import Gallery from './Gallery.vue'
+import WeiboItem from './WeiboItem.vue'
 
 Vue.config.debug = true
 
 $(function () {
-
-var WeiboBody = Vue.extend({
-    template: '#weibo-body-template',
-    props: ['status'],
-    methods: {
-        save: function () {
-
-        },
-        showReposts: function () {
-
-        },
-        showComments: function () {
-            var status = this.$data.status
-            var len = status.comments.length
-
-            if (len) {
-                status.comments.splice(0, len)
-            } else {
-                sdk.comments({
-                    id: status.id,
-                    before: progress.start,
-                    onResult: function (res) {
-                        progress.done();
-                        status.comments.push.apply(status.comments, res.comments);
-                    }
-                })
-            }
-        },
-        like: function () {
-
-        }
-    }
-});
-
-var Gallery = Vue.extend({
-    template: '#gallery-template',
-    props: ['urls'],
-    created: function () {
-        var that = this;
-
-        this.$on('imageClick', function (src, srcs) {
-            var replace = function (str) {
-                return str.replace('thumbnail', 'large')
-            }
-
-            src = replace(src)
-            srcs = srcs.map(replace)
-            
-            var gallery = this.gallery = new PhotoSwipe(this.$el, PhotoSwipeUI, srcs.map(function (src) {
-                return {
-                    src: src,
-                    w: 10,
-                    h: 10
-                }
-            }, {index: srcs.indexOf(src)}))
-
-            gallery.listen('imageLoadComplete', function (index, item) {
-                var img = gallery.currItem.container.lastChild
-                item.w = img.naturalWidth
-                item.h = img.naturalHeight
-                gallery.updateSize()
-            })
-
-            gallery.init()
-        })
-    }
-})
 
 var Images = Vue.extend({
     template: '#images-template',
@@ -94,9 +28,8 @@ var Images = Vue.extend({
     }
 })
 
-Vue.component('weibo-body', WeiboBody)
+Vue.component('weibo-item', WeiboItem)
 Vue.component('gallery', Gallery)
-Vue.component('images', Images)
 
 Vue.filter('pluck', function (value, key) {
     return value.map(function (v) {
