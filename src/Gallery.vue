@@ -38,6 +38,9 @@
 </template>
 
 <script>
+require('photoswipe/dist/photoswipe.css')
+require('photoswipe/dist/default-skin/default-skin.css')
+
 import PhotoSwipe from 'photoswipe'
 import PhotoSwipeUI from 'photoswipe/src/js/ui/photoswipe-ui-default'
 

@@ -1,5 +1,13 @@
+<style>
+  .weibo-images > img {
+    max-width: 120px;
+    max-height: 120px;
+    margin: 12px;
+  }
+</style>
+
 <template>
-  <div>
+  <div class="weibo-images">
     <img src="{{url.thumbnail_pic}}" v-repeat="url in urls" v-on="click: clickImage" />
   </div>
 </template>
