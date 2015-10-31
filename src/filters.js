@@ -26,7 +26,7 @@ var linkify = function (text, attrs) {
 var atify = function (text, attrs) {
   attrs = extend({href: '#'}, attrs)
   return text.replace(AT_RE, function (at) {
-    return '<a ' + attribute(attrs) + '>' + at + '</a>'
+    return '<a ' + attribute(attrs) + '><span class="at">@</span>' + at.substr(1) + '</a>'
   })
 }
 

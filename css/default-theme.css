@@ -9,7 +9,7 @@ img {
 }
 
 a {
-    color: rgb(38, 50, 56);
+    color: rgb(132, 47, 107);
 }
 
 #home {
@@ -181,7 +181,7 @@ nav > progress {
 
 .nested-weibo {
     position: relative;
-    background: #94A9B3;
+    background: rgba(172, 204, 220, 0.63);
     padding-bottom: 1px;
 }
 
@@ -192,7 +192,7 @@ nav > progress {
     content: '';
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 10px solid #94A9B3;
+    border-bottom: 10px solid rgba(172, 204, 220, 0.63);
 }
 
 .weibo-operations {
@@ -202,17 +202,16 @@ nav > progress {
 }
 
 .comments > ul {
-    padding: 12px 24px;
+    padding: 12px 0;
     
 }
 
 .comments li {
-    margin: 6px 0;
+    padding: 12px 24px;
 }
 
-.comments {
-    transition: height 0.4s;
-    color: rgb(98, 107, 111);
+.comments li:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
 #load-more {

@@ -15,7 +15,7 @@
 <gallery></gallery>
 <div id="main-container">
     <ul id="weibos" class="unstyled">
-        <li class="weibo-container" id="wb{{status.id}}" v-repeat="status in statuses"><weibo-item status="{{status}}"/></li>
+        <li class="weibo-container" id="wb{{status.id}}" v-for="status in statuses"><weibo-item :status="status"/></li>
     </ul>
     <button id="load-more" class="unstyled">加载更多</button>
 </div>

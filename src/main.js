@@ -16,18 +16,6 @@ Vue.config.debug = true
 
 $(function () {
 
-var Images = Vue.extend({
-    template: '#images-template',
-    props: ['urls'],
-    methods: {
-        clickImage: function (e) {
-            this.$dispatch('imageClick', e.target.src, this.urls.map(function (url) {
-                return url.thumbnail_pic
-            }))
-        }
-    }
-})
-
 Vue.component('weibo-item', WeiboItem)
 Vue.component('gallery', Gallery)
 
