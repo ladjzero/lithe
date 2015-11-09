@@ -4,21 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <title>Lithe</title>
-    <link href="css/base.css" rel="stylesheet"/>
-    <link href="css/default-theme.css" rel="stylesheet"/>
-    <link href="node_modules/nprogress/nprogress.css" rel="stylesheet"/>
     <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3942605728&debug=true"></script>
-    <script src="dist/app.bundle.js"></script>
 </head>
-<body class="unstyled" id="app">
-
-<gallery></gallery>
-<div id="main-container">
-    <ul id="weibos" class="unstyled">
-        <li class="weibo-container" id="wb{{status.id}}" v-for="status in statuses"><weibo-item :status="status"/></li>
-    </ul>
-    <button id="load-more" class="unstyled">加载更多</button>
-</div>
-</div>
+<body>
+  <app :statuses="statuses"></app>
+  <script src="dist/app.bundle.js"></script>
 </body>
 </html>

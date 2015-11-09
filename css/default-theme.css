@@ -67,14 +67,6 @@ nav:hover #logo:after {
     border-radius: 6px
 }
 
-#weibos {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 720px;
-    width: 61.8%;
-    margin-bottom: 0;
-}
-
 .weibo-container:nth-child(odd) {
     background: #EAEAEA;
     border-bottom: 1px solid rgba(38, 50, 56, 0.05);
