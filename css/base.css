@@ -20,3 +20,7 @@ ul.unstyled, ol.unstyled {
     display: inline-block;
     position: absolute;
 }
+
+.clear {
+    clear: both;
+}

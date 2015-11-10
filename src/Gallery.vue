@@ -48,20 +48,25 @@ module.exports = {
   props: ['urls'],
   created: function () {
     var that = this;
-    this.$on('imageClick', function (src, srcs) {
-      var replace = function (str) {
-        return str.replace('thumbnail', 'large')
-      }
+    this.$on('imageClick', function (wbid, src, srcs) {
+      var replace = str => str.replace('thumbnail', 'large')
+      var images = document.getElementById('wb-' + wbid).querySelectorAll('.weibo-images img')
+
       src = replace(src)
       srcs = srcs.map(replace)
       
-      var gallery = this.gallery = new PhotoSwipe(this.$el, PhotoSwipeUI, srcs.map(src => ({src: src, w: 100, h: 100})), {index: srcs.indexOf(src)})
+      var gallery = this.gallery = new PhotoSwipe(this.$el, PhotoSwipeUI, srcs.map((src, i) => ({src: src, w: images[i].naturalWidth || 100, h: images[i].naturalHeight || 100})), {
+        index: srcs.indexOf(src),
+        bgOpacity: 0.9
+      })
+
       gallery.listen('imageLoadComplete', function (index, item) {
         var img = gallery.currItem.container.lastChild
         item.w = img.naturalWidth
         item.h = img.naturalHeight
         gallery.updateSize()
       })
+
       gallery.init()
     })
   }

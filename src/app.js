@@ -1,6 +1,8 @@
 require('../css/base.css')
 require('../css/default-theme.css')
 require('nprogress/nprogress.css')
+require('fonts.css/fonts.css')
+require('ionicons-pre/css/ionicons.css')
 
 var Vue = require('vue')
 var App = require('./App.vue')

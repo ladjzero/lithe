@@ -69,7 +69,6 @@ nav:hover #logo:after {
 
 .weibo-container:nth-child(odd) {
     background: #EAEAEA;
-    border-bottom: 1px solid rgba(38, 50, 56, 0.05);
 }
 
 .weibo-container {
@@ -84,7 +83,6 @@ nav:hover #logo:after {
 .weibo-container:nth-child(even) {
     background: white;
     color: rgb(23, 28, 31);
-    border-bottom: 1px solid rgba(38, 50, 56, 0.13);
 }
 
 nav {
@@ -173,7 +171,7 @@ nav > progress {
 
 .nested-weibo {
     position: relative;
-    background: rgba(172, 204, 220, 0.63);
+    background: rgb(245, 245, 245);
     padding-bottom: 1px;
 }
 
@@ -184,11 +182,11 @@ nav > progress {
     content: '';
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 10px solid rgba(172, 204, 220, 0.63);
+    border-bottom: 10px solid rgb(245, 245, 245);
 }
 
 .weibo-operations {
-    margin: 12px 24px;
+    margin: 12px 24px 0;
 
     text-align: right;
 }
@@ -202,16 +200,9 @@ nav > progress {
     padding: 12px 24px;
 }
 
-.comments li:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
 #load-more {
-    display: block;
     margin: 0 auto 6.3%;
-
-    width: 61.8%;
-    max-width: 720px;
+    width: 100%;
     background: rgb(84, 110, 122);
     color: white;
     padding: 24px;

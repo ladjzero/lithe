@@ -21,7 +21,7 @@ module.exports = {
   },
   methods: {
     clickImage: function (e) {
-      this.$dispatch('imageClick', e.target.src, this.urls)
+      this.$dispatch('_imageClick', e.target.src, this.urls)
     }
   }}
 </script>

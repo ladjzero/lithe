@@ -3,13 +3,9 @@
     text-decoration: none;
   }
 
-  .weibo-operations a {
-    font-weight: bolder;
-  }
-
   span.at {
-    font-size: 160%;
-    vertical-align: middle;
+    font-size: 120%;
+    font-weight: bold;
   }
 
   @media (min-width: 1024px) {
@@ -20,6 +16,29 @@
       width: 360px;
       background: white;
     }
+
+    .comments ul {
+      padding: 0;
+    }
+
+    .comments li {
+      padding: 6px 12px;
+    }
+  }
+
+  .comments {
+    font-size: small;
+  }
+
+  .weibo-operations a{
+    font-size: 140%;
+    vertical-align: middle;
+  }
+
+  .weibo-operations a span {
+    font-size: small;
+    vertical-align: bottom;
+    padding: 0 6px;
   }
 </style>
 
@@ -37,15 +56,14 @@
   <weibo-images :urls="status.pic_urls | pluck 'thumbnail_pic'"></weibo-images>
 
   <div class="weibo-operations">
-    <a class="btn btn-default" href="#" v-on:click.prevent="save">收藏</a>
-    <a class="btn btn-default" href="#" v-on:click.prevent="showReposts">转发<span v-if="status.reposts_count">({{status.reposts_count}})</span></a>
-    <a class="btn btn-default" href="#" v-on:click.prevent="showComments">评论<span v-if="status.comments_count">({{status.comments_count}})</span></a>
-    <a class="btn btn-default" href="#" v-on:click.prevent="like">赞<span v-if="status.attitudes_count">({{status.attitudes_count}})</span></a>
+    <a class="ion-ios-undo-outline" title="转发" href="#" v-on:click.prevent="showReposts"><span>{{status.reposts_count || ''}}</span></a>
+    <a class="ion-ios-chatboxes-outline" title="评论" href="#" v-on:click.prevent="showComments"><span>{{status.comments_count || ''}}</span></a>
+    <a class="ion-ios-star-outline" title="赞" href="#" v-on:click.prevent="like"><span>{{status.attitudes_count || ''}}</span></a>
   </div>
   <div class="comments card" v-if="status.comments && status.comments.length" transition="expand">
     <comments :comments="status.comments"></comments>
   </div>
-  <div class="nested-weibo" v-if="status.retweeted_status">
+  <div class="nested-weibo" v-if="status.retweeted_status" id="wb-{{status.retweeted_status.id}}">
     <weibo-item :status="status.retweeted_status"></weibo-item>
   </div>
 </template>
@@ -59,8 +77,10 @@ import sdk from './sdk'
 module.exports = {
   name: 'weibo-item',
   props: ['status'],
-  beforeCompile: function () {
-    console.log(this)
+  created: function () {
+    this.$on('_imageClick', function (url, urls) {
+      this.$root.$broadcast('imageClick', this.status.id, url, urls)
+    })
   },
   methods: {
     save: function () {
