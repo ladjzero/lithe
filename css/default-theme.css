@@ -19,10 +19,6 @@ a {
     vertical-align: -webkit-baseline-middle;
 }
 
-#main-container {
-    padding-top: 76px;
-}
-
 #profile #avatar {
     height: 33px;
     width: 33px;
@@ -67,24 +63,6 @@ nav:hover #logo:after {
     border-radius: 6px
 }
 
-.weibo-container:nth-child(odd) {
-    background: #EAEAEA;
-}
-
-.weibo-container {
-    /* margin-top: 1px; */
-}
-
-.weibo-container:first-child {
-    border-radius: 6px 6px 0 0;
-
-}
-
-.weibo-container:nth-child(even) {
-    background: white;
-    color: rgb(23, 28, 31);
-}
-
 nav {
     background: rgba(255, 255, 255, 0.92);
     width: 100%;
@@ -93,16 +71,6 @@ nav {
     text-align: center;
     transition: top 0.4s;
     top: 0;
-}
-
-#progress {
-    height: 3px;
-    top: 50px;
-    background: rgb(7, 218, 245);
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    transition: width 1s;
 }
 
 nav > progress {
@@ -169,27 +137,9 @@ nav > progress {
     max-height: none;
 }
 
-.nested-weibo {
-    position: relative;
-    background: rgb(245, 245, 245);
-    padding-bottom: 1px;
-}
 
-.nested-weibo:before {
-    top: -10px;
-    left: 30px;
-    position: absolute;
-    content: '';
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 10px solid rgb(245, 245, 245);
-}
 
-.weibo-operations {
-    margin: 12px 24px 0;
 
-    text-align: right;
-}
 
 .comments > ul {
     padding: 12px 0;
@@ -200,21 +150,7 @@ nav > progress {
     padding: 12px 24px;
 }
 
-#load-more {
-    margin: 0 auto 6.3%;
-    width: 100%;
-    background: rgb(84, 110, 122);
-    color: white;
-    padding: 24px;
-    text-align: center;
-    border-radius: 0 0 6px 6px;
-    cursor: pointer;
-}
 
-#load-more[disabled] {
-    background: rgb(136, 150, 157);
-    cursor: not-allowed;
-}
 
 .no-shadow {
     box-shadow: none!important;

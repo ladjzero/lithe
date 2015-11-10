@@ -13,7 +13,8 @@ require('./registerFilters')
 
 var data = {
   maxId: 0,
-  statuses: []
+  statuses: [],
+  isLoading: false
 }
 
 Promise
@@ -61,6 +62,12 @@ function load() {
 new Vue({
   el: 'body',
   data: data,
+  created: function () {
+    this.$on('loadMore', load);
+    this.$watch('isLoading', function (newVal, oldVal) {
+      progress[newVal ? 'start' : 'done']()
+    })
+  },
   components: {
     app: App
   }

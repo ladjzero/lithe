@@ -30,8 +30,13 @@
     font-size: small;
   }
 
+  .weibo-operations {
+    margin: 12px 24px 24px;
+    text-align: right;
+    font-size: 2em;
+  }
+
   .weibo-operations a{
-    font-size: 140%;
     vertical-align: middle;
   }
 
@@ -39,6 +44,22 @@
     font-size: small;
     vertical-align: bottom;
     padding: 0 6px;
+  }
+
+  .nested-weibo {
+    position: relative;
+    background: rgb(206, 209, 210);
+    padding-bottom: 1px;
+}
+
+  .nested-weibo:before {
+    top: -10px;
+    left: 30px;
+    position: absolute;
+    content: '';
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid rgb(206, 209, 210);
   }
 </style>
 
