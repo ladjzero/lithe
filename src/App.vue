@@ -1,4 +1,9 @@
 <style>
+#main-container {
+  font-size: 16px;
+  line-height: 2em;
+}
+
   #weibos-and-button {
     width: 600px;
     margin: 60px auto;
@@ -49,7 +54,7 @@
       <ul id="weibos" class="unstyled font-hei">
           <li class="weibo-container" id="wb-{{status.id}}" v-for="status in statuses"><weibo-item :status="status"></weibo-item></li>
       </ul>
-      <button id="load-more" class="unstyled font-hei" @click="loadMore" :disabled="isLoading">{{isLoading ? '载入中 ...' : '加载更多'}}</button>
+      <button v-if="statuses.length" id="load-more" class="unstyled font-hei" @click="loadMore" :disabled="isLoading">{{isLoading ? '载入中 ...' : '加载更多'}}</button>
     </div>
   </div>
 </template>

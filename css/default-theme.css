@@ -108,39 +108,6 @@ nav > progress {
     text-align: center;
 }
 
-.weibo-thumbnail-wapper {
-    width: 100px;
-    height: 100px;
-    margin: 4px;
-    background: rgba(38, 50, 56, 0.16);
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-}
-
-.weibo-thumbnail-wapper.image-large {
-    width: 100%;
-    height: auto;
-    margin-left: 0;
-}
-
-.weibo-thumbnail {
-    max-width: 100px;
-
-    max-height: 100px;
-}
-
-.weibo-thumbnail-wapper.image-large .weibo-thumbnail {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: none;
-}
-
-
-
-
-
 .comments > ul {
     padding: 12px 0;
     
@@ -150,46 +117,6 @@ nav > progress {
     padding: 12px 24px;
 }
 
-
-
 .no-shadow {
     box-shadow: none!important;
-}
-
-ol.indicator {
-    width: 100%;
-    line-height: 0;
-    background: rgba(38, 50, 56, 0.44);
-    padding: 0;
-}
-
-.indicator > li {
-    padding-bottom: 8%;
-    width: 8%;
-    margin: 1%;
-    background-position: center;
-    background-size: contain;
-    display: inline-block;
-    background-repeat: no-repeat; 
-}
-
-.indicator > li.active {
-    outline: 1px solid white;
-}
-
-.blueimp-gallery-carousel > .slides {
-    position: relative!important;
-}
-
-.blueimp-gallery-carousel {
-    padding: 0!important;
-}
-
-@media (max-width: 720px) {
-    #weibos, #load-more {
-        margin-left: 3%;
-        margin-right: 3%;
-        width: 94%;
-        min-width: none;
-    }
 }

@@ -54,7 +54,7 @@
 
   .nested-weibo:before {
     top: -10px;
-    left: 30px;
+    left: 36px;
     position: absolute;
     content: '';
     border-left: 8px solid transparent;
