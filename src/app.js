@@ -14,6 +14,7 @@ require('./registerFilters')
 var data = {
   maxId: 0,
   statuses: [],
+  comments: [],
   isLoading: false
 }
 
@@ -59,13 +60,30 @@ function load() {
   });
 }
 
+function showComments(statusId) {
+  sdk.comments({
+    id: statusId,
+    before: () => {data.isLoading = true},
+    onResult: function (res) {
+      data.isLoading = false
+      data.comments.length = 0
+      // Do not use Array.prototype.push
+      data.comments.push.apply(data.comments, res.comments)
+    }
+  })
+}
+
 new Vue({
   el: 'body',
   data: data,
   created: function () {
     this.$on('loadMore', load);
+    this.$on('showComments', showComments)
     this.$watch('isLoading', function (newVal, oldVal) {
       progress[newVal ? 'start' : 'done']()
+    })
+    this.$watch('comments', function (newVal) {
+      document.body.className = newVal.length ? 'panel-open' : ''
     })
   },
   components: {

@@ -24,6 +24,8 @@ var attribute = function (attrs) {
 }
 
 var linkify = function (text, attrs) {
+  if (typeof attrs == 'string') attrs = {'class': attrs}
+
   attrs = extend({target: '_blank'}, attrs)
   return text.replace(URI_RE, function (uri) {
     return '<a href="' + uri + '" ' + attribute(attrs) + '>' + uri + '</a>'
@@ -31,6 +33,8 @@ var linkify = function (text, attrs) {
 }
 
 var atify = function (text, attrs) {
+  if (typeof attrs == 'string') attrs = {'class': attrs}
+
   attrs = extend({href: '#'}, attrs)
   return text.replace(AT_RE, function (at) {
     return '<a ' + attribute(attrs) + '><span class="at">@</span>' + at.substr(1) + '</a>'

@@ -4,8 +4,28 @@
   }
 
   span.at {
-    font-size: 120%;
     font-weight: bold;
+  }
+
+  .weibo-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .icon *, .icon::before, .icon::after {
+    vertical-align: middle;
+  }
+
+  .weibo-text {
+    margin: 24px;
+  }
+
+  .weibo-text a {
+    margin: 6px;
+  }
+
+  a.linkify:hover {
+    text-decoration: underline;
   }
 
   @media (min-width: 1024px) {
@@ -31,18 +51,11 @@
   }
 
   .weibo-operations {
-    margin: 12px 24px 24px;
-    text-align: right;
-    font-size: 2em;
-  }
-
-  .weibo-operations a{
-    vertical-align: middle;
+    font-size: 1.6em;
   }
 
   .weibo-operations a span {
     font-size: small;
-    vertical-align: bottom;
     padding: 0 6px;
   }
 
@@ -71,18 +84,16 @@
         <span>{{status.user.screen_name}}</span>
       </a>
     </div>
+    <div class="weibo-operations">
+      <a class="icon show-on-hover ion-ios-undo-outline" title="转发" href="#" v-on:click.prevent="showReposts"><span>{{status.reposts_count || ''}}</span></a>  
+      <a class="icon show-on-hover ion-ios-star-outline" title="赞" href="#" v-on:click.prevent="like"><span>{{status.attitudes_count || ''}}</span></a>
+      <a class="icon ion-ios-chatboxes-outline" title="评论" href="#" v-on:click.prevent="showComments"><span>{{status.comments_count || ''}}</span></a>
+    </div>
   </div>
-  <p class="weibo-text" v-html="status.text | linkify | atify"></p>
+  <p class="weibo-text" v-html="status.text | linkify 'linkify'| atify 'atify'"></p>
 
   <weibo-images :urls="status.pic_urls | pluck 'thumbnail_pic'"></weibo-images>
-
-  <div class="weibo-operations">
-    <a class="ion-ios-undo-outline" title="转发" href="#" v-on:click.prevent="showReposts"><span>{{status.reposts_count || ''}}</span></a>
-    <a class="ion-ios-chatboxes-outline" title="评论" href="#" v-on:click.prevent="showComments"><span>{{status.comments_count || ''}}</span></a>
-    <a class="ion-ios-star-outline" title="赞" href="#" v-on:click.prevent="like"><span>{{status.attitudes_count || ''}}</span></a>
-  </div>
-  <div class="comments card" v-if="status.comments && status.comments.length" transition="expand">
-    <comments :comments="status.comments"></comments>
+  
   </div>
   <div class="nested-weibo" v-if="status.retweeted_status" id="wb-{{status.retweeted_status.id}}">
     <weibo-item :status="status.retweeted_status"></weibo-item>
@@ -109,21 +120,7 @@ module.exports = {
     showReposts: function () {
     },
     showComments: function () {
-      var status = this.$data.status
-      var len = status.comments.length
-
-      if (len) {
-        status.comments.splice(0, len)
-      } else {
-        sdk.comments({
-          id: status.id,
-          before: progress.start,
-          onResult: function (res) {
-            progress.done();
-            status.comments.push.apply(status.comments, res.comments);
-          }
-        })
-      }
+      this.$dispatch('showComments', this.$data.status.id)
     },
     like: function () {
     }
