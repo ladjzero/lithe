@@ -24,8 +24,8 @@
   }
 
   #main-container {
-    font-size: 16px;
-    line-height: 2em;
+    font-size: 14px;
+    line-height: 1.5em;
   }
 
   #weibos-and-button {
@@ -36,6 +36,7 @@
   #weibos {
     background: white;
     border-radius: 6px 6px 0 0;
+    padding-top: 1px;
   }
 
   .weibo-container {

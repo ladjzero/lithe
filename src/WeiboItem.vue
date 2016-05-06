@@ -9,6 +9,7 @@
 
   .weibo-header {
     display: flex;
+    margin: 24px 24px 0;
     justify-content: space-between;
   }
 
@@ -21,7 +22,7 @@
   }
 
   .weibo-text a {
-    margin: 6px;
+    margin: 2px;
   }
 
   a.linkify:hover {
@@ -50,30 +51,19 @@
     font-size: small;
   }
 
-  .weibo-operations {
-    font-size: 1.6em;
+  .weibo-operations a {
+    color: gray;
   }
 
   .weibo-operations a span {
-    font-size: small;
-    padding: 0 6px;
+    padding: 0 2px;
   }
 
   .nested-weibo {
-    position: relative;
-    background: rgb(206, 209, 210);
-    padding-bottom: 1px;
+    border-left: solid rgb(206, 209, 210);
+    margin-left: 20px;
 }
 
-  .nested-weibo:before {
-    top: -10px;
-    left: 36px;
-    position: absolute;
-    content: '';
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 10px solid rgb(206, 209, 210);
-  }
 </style>
 
 <template>
@@ -85,14 +75,14 @@
       </a>
     </div>
     <div class="weibo-operations">
-      <a class="icon show-on-hover ion-ios-undo-outline" title="转发" href="#" v-on:click.prevent="showReposts"><span>{{status.reposts_count || ''}}</span></a>  
-      <a class="icon show-on-hover ion-ios-star-outline" title="赞" href="#" v-on:click.prevent="like"><span>{{status.attitudes_count || ''}}</span></a>
-      <a class="icon ion-ios-chatboxes-outline" title="评论" href="#" v-on:click.prevent="showComments"><span>{{status.comments_count || ''}}</span></a>
+      <a href="#" v-on:click.prevent="showReposts">转发<span>{{status.reposts_count || ''}}</span></a>  
+      <a href="#" v-on:click.prevent="like">赞<span>{{status.attitudes_count || ''}}</span></a>
+      <a href="#" v-on:click.prevent="showComments">评论<span>{{status.comments_count || ''}}</span></a>
     </div>
   </div>
   <p class="weibo-text" v-html="status.text | linkify 'linkify'| atify 'atify'"></p>
 
-  <weibo-images :urls="status.pic_urls | pluck 'thumbnail_pic'"></weibo-images>
+  <weibo-images v-if="status.pic_urls.length" :urls="status.pic_urls | pluck 'thumbnail_pic'"></weibo-images>
   
   </div>
   <div class="nested-weibo" v-if="status.retweeted_status" id="wb-{{status.retweeted_status.id}}">

@@ -24,3 +24,7 @@ ul.unstyled, ol.unstyled {
 .clear {
     clear: both;
 }
+
+p {
+	margin: 0;
+}

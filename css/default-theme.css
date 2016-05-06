@@ -85,12 +85,6 @@ nav > progress {
     top: auto;
 }
 
-.weibo-header {
-    padding: 24px 24px 0;
-
-    color: rgb(38, 50, 56);
-}
-
 .weibo-avatar {
     width: 40px;
     height: 40px;
@@ -102,6 +96,7 @@ nav > progress {
     font-size: 0;
     line-height: 100px;
     text-align: center;
+    margin-bottom: 24px;
 }
 
 .comments > ul {
